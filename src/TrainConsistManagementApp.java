@@ -16,33 +16,31 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("=======================================");
-        System.out.println("UC7 - Sort Bogies by Capacity (Comparator)");
+        System.out.println("UC10 - Count Total Seats in Train");
         System.out.println("=======================================\n");
 
         // Create list of bogies
         List<Bogie> bogies = new ArrayList<>();
 
-        // Add bogies
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("General", 90));
+        bogies.add(new Bogie("Sleeper", 70));
 
-        // Display before sorting
-        System.out.println("Before Sorting:");
+        // Display bogies
+        System.out.println("Bogies in Train:");
         for (Bogie b : bogies) {
             System.out.println(b.name + " -> " + b.capacity);
         }
 
-        // Sort using Comparator
-        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+        // 🔥 REDUCE LOGIC (MAIN PART)
+        int totalSeats = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
 
-        // Display after sorting
-        System.out.println("\nAfter Sorting by Capacity:");
-        for (Bogie b : bogies) {
-            System.out.println(b.name + " -> " + b.capacity);
-        }
+        // Display total
+        System.out.println("\nTotal Seating Capacity of Train: " + totalSeats);
 
-        System.out.println("\nUC7 sorting completed...");
+        System.out.println("\nUC10 aggregation completed...");
     }
 }
