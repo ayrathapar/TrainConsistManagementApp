@@ -5,38 +5,51 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("=======================================");
-        System.out.println("UC18 - Linear Search for Bogie ID");
+        System.out.println("UC19 - Binary Search for Bogie ID");
         System.out.println("=======================================\n");
 
         // Create array of bogie IDs
         String[] bogieIDs = {"BG101", "BG205", "BG309", "BG412", "BG550"};
 
-        // Bogie ID to search
-        String searchID = "BG309";
+        // 🔹 Ensure sorted (important precondition)
+        Arrays.sort(bogieIDs);
 
-        // Display all bogies
-        System.out.println("Available Bogie IDs:");
+        // Search key
+        String key = "BG309";
+
+        // Display sorted bogies
+        System.out.println("Sorted Bogie IDs:");
         for (String id : bogieIDs) {
             System.out.println(id);
         }
 
-
+        // 🔥 BINARY SEARCH LOGIC
+        int low = 0;
+        int high = bogieIDs.length - 1;
         boolean found = false;
 
-        for (String id : bogieIDs) {
-            if (id.equals(searchID)) {
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            int result = key.compareTo(bogieIDs[mid]);
+
+            if (result == 0) {
                 found = true;
                 break;
+            } else if (result > 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
 
         // Display result
         if (found) {
-            System.out.println("\nBogie " + searchID + " found in train consist.");
+            System.out.println("\nBogie " + key + " found using Binary Search.");
         } else {
-            System.out.println("\nBogie " + searchID + " NOT found.");
+            System.out.println("\nBogie " + key + " NOT found.");
         }
 
-        System.out.println("\nUC18 search completed...");
+        System.out.println("\nUC19 search completed...");
     }
 }
